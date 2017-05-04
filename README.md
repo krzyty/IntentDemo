@@ -1,0 +1,19 @@
+# IntentDemo
+A simple demo for Intent in Android.
+
+Demo一共包括四个Activity.
+
+在TheFirstActivity中，一共有四个Button.
+
+前两个Button通过隐式Intent启动系统的拍照功能。
+
+它们的区别是，点击第一个Button, 不会将拍摄的照片存储在本地，而只是在onActivityResult()回调方法中返回一个Thumbnail.
+
+而点击第二个Button, 会将拍摄得到的全尺寸照片存储到指定路径，相应地在onActicityResult()中返回的intent为null.
+
+第三四个Button会将拍摄的结果通过显式Intent传递到其他Activity显示。
+
+点击第三个Button直接将onActivityResult()返回的缩略图Bitmap对象传递到TheSecondActivity.TheSecondActivity收到该缩略图后直接放大显示。
+
+第四个Button的目的是在TheThirdActivity中显示拍摄的全尺寸图片。由于Android系统对Intent传递对象的大小有限制（1M左右），无法直接传递全尺寸照片，因此传递
+照片在本地的存储路径。当TheThirdActivity收到此路径后，将拍摄得到的照片解码为Bitmap对象。在这个过程中会自动旋转照片，因此在显示时需要对图像进行角度矫正。
